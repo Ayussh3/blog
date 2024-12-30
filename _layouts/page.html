@@ -1,43 +1,43 @@
 <!doctype html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
-<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7 tw-bg-white tw-text-gray-900" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8 tw-bg-white tw-text-gray-900" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9 tw-bg-white tw-text-gray-900" lang="en"><![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js" lang="en">
+<html class="no-js tw-bg-white tw-text-gray-900 tw-transition-colors duration-300" lang="en">
 <!--<![endif]-->
 
 <head>{% include head.html %}</head>
 
-<body id="page">
+<body id="page" class="tw-bg-white tw-text-gray-900 dark:tw-bg-gray-900 dark:tw-text-gray-100">
 
-{% include navigation.html %} {% include special-effect.html %}
+{% include navigation.html %} 
+{% include special-effect.html %}
 
-  <div id="main" role="main">
+  <div id="main" role="main" class="tw-px-4 tw-py-6 sm:tw-px-6 lg:tw-px-8">
     <article class="entry">
+
       {% if page.image.feature %}
-        <img src="{{ site.url }}{{ site.baseurl }}/images/{{ page.image.feature }}" class="entry-feature-image" alt="{{ page.title }}" 
+        <img src="{{ site.url }}{{ site.baseurl }}/images/{{ page.image.feature }}" class="tw-w-full tw-h-auto tw-rounded-lg tw-shadow-md tw-mb-4" alt="{{ page.title }}" 
           {% if site.logo==null %} 
             style="margin-top:0;" 
           {% endif %} />
         {% if page.image.credit %}
-          <p class="image-credit">Photo Credit: 
-            <a href="{{ page.image.creditlink }}">{{ page.image.credit }}</a>
+          <p class="tw-text-sm tw-text-gray-600 tw-mt-2 dark:tw-text-gray-400">Photo Credit: 
+            <a href="{{ page.image.creditlink }}" class="tw-text-blue-600 hover:tw-text-blue-800 dark:tw-text-blue-400 dark:hover:tw-text-blue-500">{{ page.image.credit }}</a>
           </p>
-        {% endif %} 
+        {% endif %}
       {% endif %}
-      
+
       <div class="container-fluid">
 
-        <div class="row">
-          <header class="col-sm-12 col-md-12 col-lg-12 entry-header">
-            <h1>
-              <center>
-                {% if page.headline %}
-                  {{ page.headline }}
-                {% else %}
-                  {{ page.title }}
-                {% endif %}
-              </center>
+        <div class="row tw-mb-6">
+          <header class="col-sm-12 col-md-12 col-lg-12 entry-header tw-text-center tw-pt-7">
+            <h1 class="tw-text-4xl tw-font-bold tw-text-gray-900 dark:tw-text-gray-100">
+              {% if page.headline %}
+                {{ page.headline }}
+              {% else %}
+                {{ page.title }}
+              {% endif %}
             </h1>
           </header>
         </div>
@@ -49,10 +49,11 @@
           </div>
 
           <div class="col-sm-12 col-md-8 col-lg-8">
-            <div class="post-content-justify">
+            <div class="post-content-justify tw-space-y-4">
               {{ content }}
             </div>
           </div><!-- /.entry-content -->
+          
           <div class="col-md-1 col-lg-1"></div>
         </div><!-- /row -->
 
@@ -61,12 +62,28 @@
   </div>
   <!-- /#main -->
 
+  {% include footer.html %}
+    <!-- /.footer-wrapper -->
 
-  <div class="footer-color">
-    <footer role="contentinfo">
-      <center>{% include footer.html %}</center>
-    </footer>
-  </div><!-- /.footer-wrapper -->{% include scripts.html %}
+  <script>
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const htmlElement = document.documentElement;
+    darkModeToggle.addEventListener('click', () => {
+      if (htmlElement.classList.contains('tw-dark')) {
+        htmlElement.classList.remove('tw-dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        htmlElement.classList.add('tw-dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  
+    // Apply saved theme on load
+    if (localStorage.getItem('theme') === 'dark') {
+      htmlElement.classList.add('tw-dark');
+    }
+  </script>
 
+  {% include scripts.html %}
 </body>
 </html>

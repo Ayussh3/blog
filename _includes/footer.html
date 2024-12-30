@@ -1,4 +1,16 @@
-  <span class='footer-text'>
-    &copy;  2005-<script> document.write(new Date().getFullYear()) </script>, {{ site.owner.name }}. | <a href="/terms_of_use/">Terms of Use</a> &middot; <a href="/privacy_policy/">Privacy Policy</a>
-
+<footer class="tw-bg-gradient-to-r tw-from-gray-900 tw-via-gray-800 tw-to-gray-700 tw-px-4 tw-py-2 tw-text-xs tw-text-gray-400 tw-flex tw-justify-between tw-items-center tw-w-full">
+  <span>
+    &copy; 2005-<script>document.write(new Date().getFullYear())</script>, {{ site.owner.name }}.
   </span>
+  <div class="tw-flex tw-space-x-3">
+    <a href="/terms_of_use/" 
+       class="tw-font-medium tw-text-gray-300 hover:tw-text-gray-100 tw-transition tw-duration-300">
+      Terms of Use
+    </a>
+    <span>&middot;</span>
+    <a href="/privacy_policy/" 
+       class="tw-font-medium tw-text-gray-300 hover:tw-text-gray-100 tw-transition tw-duration-300">
+      Privacy Policy
+    </a>
+  </div>
+</footer>

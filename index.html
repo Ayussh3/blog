@@ -6,39 +6,57 @@ tags: [eLitmus, recent]
 ---
 
 
-<ul class="post-list">
-{% for post in site.posts limit:10 %} 
+<ul class="post-list tw-space-y-8 tw-mt-6">
+	{% for post in site.posts limit:10 %}
+	<li class="single-post tw-bg-white dark:tw-bg-gray-800 tw-shadow-lg tw-rounded-lg tw-overflow-hidden tw-transition-transform tw-duration-300 hover:tw-shadow-2xl hover:tw-scale-105">
+	  <article class="tw-flex tw-flex-col sm:tw-flex-row tw-gap-6 tw-p-6">
+		
+		<!-- Post Date -->
+		<div class="tw-flex-shrink-0 tw-text-center tw-bg-yellow-100 tw-text-yellow-600 dark:tw-bg-yellow-700 dark:tw-text-yellow-300 tw-p-4 tw-rounded-md">
+		  <time datetime="{{ post.date | date_to_xmlschema }}" class="tw-text-sm">
+			<i class="fa fa-calendar"></i>
+			<span class="tw-block tw-font-semibold tw-text-lg">{{ post.date | date: "%d" }}</span>
+			<span class="tw-uppercase tw-text-xs">{{ post.date | date: "%b %Y" }}</span>
+		  </time>
+		</div>
   
-<li class="single-post">
-	<span class="entry-date date published">
-		<time datetime="{{ post.date | date_to_xmlschema }}">
-			<i class="fa fa-calendar"></i> {{ post.date | date: "%B %d, %Y" }}
-		</time>
-	</span>
-	<article>
-		<header class="entry-header">
-			<h3 class="entry-title-summary">
-				<a href="{{ site.url }}{{ site.baseurl }}{{ post.url }}">{{ post.title }} </a>
+		<!-- Post Content -->
+		<div class="tw-flex-grow">
+		  <header class="entry-header">
+			<h3 class="entry-title-summary tw-text-2xl tw-font-semibold tw-text-gray-900 hover:tw-text-yellow-600 dark:tw-text-gray-100 dark:hover:tw-text-yellow-400">
+			  <a href="{{ site.url }}{{ site.baseurl }}{{ post.url }}">
+				{{ post.title }}
+			  </a>
 			</h3>
-			<span class="d-flex row ml-0">
-				{% for tag in post.tags %}
-					<div class="tag mr-2 rounded px-1 text-white small">{{ tag }}</div>
-				{% endfor %}
+		  </header>
+  
+		  <!-- Post Tags -->
+		  <div class="tw-flex tw-flex-wrap tw-gap-2 tw-mt-2">
+			{% for tag in post.tags %}
+			<span class="tw-inline-block tw-bg-yellow-500 tw-text-white tw-rounded-full tw-px-3 tw-py-1 tw-text-sm tw-shadow">
+			  {{ tag }}
 			</span>
-			<div class="mt-2">
-	  		{% if post.excerpt %} 
-	    		{% capture full_url %} 
-	      			{{ site.url }}{{ site.baseurl }}{{ post.url }} 
-	    		{% endcapture %}
-	    	{{ post.excerpt | remove: '<p>' | remove: '</p>' }} 
-	    
-			<a href="{{ full_url }}" rel="nofollow" class="read-more pull-right"> read more &raquo;</a>
-	  		{% endif %}
-
-			</div>
-		</header>
-	</article>
-</li>
-{% endfor %}
-
-</ul>
+			{% endfor %}
+		  </div>
+  
+		  <!-- Post Excerpt -->
+		  <div class="tw-mt-4 tw-text-gray-700 dark:tw-text-gray-300">
+			{% if post.excerpt %}
+			{% capture full_url %}
+			{{ site.url }}{{ site.baseurl }}{{ post.url }}
+			{% endcapture %}
+			<p class="tw-line-clamp-3">
+			  {{ post.excerpt | remove: '<p>' | remove: '</p>' }}
+			</p>
+			<a href="{{ full_url }}" rel="nofollow" 
+			   class="tw-text-yellow-600 hover:tw-underline dark:tw-text-yellow-400">
+			  Read more &raquo;
+			</a>
+			{% endif %}
+		  </div>
+		</div>
+	  </article>
+	</li>
+	{% endfor %}
+  </ul>
+  

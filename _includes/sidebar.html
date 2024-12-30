@@ -1,22 +1,22 @@
-
-{% capture category_count %} {{ site.categories | size }}* {% endcapture %}
-
+{% capture category_count %}{{ site.categories | size }}{% endcapture %}
 {% assign count = category_count | plus: 0 %}
-{% if  count > 1 %}
+{% if count > 1 %}
 
-<div class="fixed-sidebar mx-auto">
-	
-	<ul class="sidebar-category list-group ml-auto">
-		<li class="categories-heading list-group-item">
-			<span class="fa fa-th-list"></span> Categories:
-		</li>
-	  {% for category in site.categories %}
-	  	<li class="list-group-item"> 
-	  		<a name="{{ category | first | capitalize }}" href="{{ site.url }}{{ site.baseurl }}/categories/{{ category | first }}/" class="category">  {{ category | first | capitalize }} </a>
-	  	</li>
-	  {% endfor %}
-	</ul>
-
+<div class="tw-w-full tw-mx-auto tw-bg-white dark:tw-bg-gray-800 dark:tw-text-gray-100 tw-rounded-lg tw-shadow-lg tw-p-4 tw-max-w-xs">
+  <h2 class="tw-text-lg tw-font-bold tw-text-gray-900 dark:tw-text-gray-100 tw-mb-4 tw-text-center">
+    <span class="fa fa-th-list tw-mr-2"></span> Categories
+  </h2>
+  <ul class="tw-space-y-2">
+    {% for category in site.categories %}
+      <li class="tw-group">
+        <a href="{{ site.url }}{{ site.baseurl }}/categories/{{ category | first }}/" 
+           class="tw-flex tw-items-center tw-justify-between tw-bg-gray-100 dark:tw-bg-gray-700 tw-rounded-md tw-px-3 tw-py-2 tw-transition tw-shadow-sm tw-text-gray-800 dark:tw-text-gray-300 hover:tw-bg-yellow-500 hover:tw-text-white">
+          <span>{{ category | first | capitalize }}</span>
+          <i class="fa fa-chevron-right tw-text-sm group-hover:tw-text-white"></i>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
 </div>
 
 {% endif %}

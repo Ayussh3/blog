@@ -1,108 +1,81 @@
-<header class="headroom">
+<header class="headroom tw-fixed tw-top-0 tw-left-0 tw-w-full tw-bg-white dark:tw-bg-gray-900 tw-shadow-md tw-z-50">
+  <nav class="tw-flex tw-items-center tw-justify-between tw-px-4 md:tw-px-8 tw-py-4 tw-w-full" role="navigation">
+    <!-- Logo -->
+    <a href="{{ site.baseurl }}/" class="tw-flex tw-items-center">
+      <img src="{{site.baseurl}}/images/elitmus-only-logo.svg" alt="Logo" class="tw-h-8 tw-w-auto">
+      <span class="tw-ml-2 tw-text-lg tw-font-semibold tw-text-gray-800 dark:tw-text-yellow-400">Blog</span>
+    </a>
 
-  <nav class="navbar navbar-expand-md navbar-dark bg-black fixed-top" role="navigation">
+    <!-- Search Bar -->
+    <div class="tw-relative tw-hidden md:tw-block">
+      <input 
+        type="text" 
+        id="search-box" 
+        placeholder="Search..." 
+        class="tw-px-4 tw-py-2 tw-w-72 tw-rounded-lg tw-border tw-border-gray-300 tw-bg-gray-50 tw-text-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-yellow-400">
+      <div class="tw-absolute tw-top-full tw-left-0 tw-w-full tw-bg-white dark:tw-bg-gray-800 tw-shadow-lg tw-rounded-lg tw-hidden" id="search-dropdown">
+        <a href="#" class="tw-block tw-px-4 tw-py-2 tw-text-gray-700 dark:tw-text-gray-200 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-700">Type more...</a>
+      </div>
+    </div>
 
-      <a class="navbar-brand" href="{{ site.baseurl }}/">
-        <img src="{{site.baseurl}}/images/elitmus-only-logo.svg" class="img-logo">
-        <span><div class="blog-label">blog</div></span>
+    <!-- Toggle Button -->
+    <button id="menu-toggle" class="tw-block md:tw-hidden tw-bg-gray-200 dark:tw-bg-gray-700 tw-p-2 tw-rounded-lg focus:tw-outline-none">
+      <span class="tw-h-5 tw-w-5 tw-bg-gray-800 dark:tw-bg-gray-100"></span>
+    </button>
+
+    <!-- Navigation Links -->
+    <div id="menu" class="tw-hidden md:tw-flex tw-items-center tw-space-x-6">
+      {% for link in site.links %}
+        {% if link.external %} 
+          <a href="{{link.url}}" class="tw-text-gray-800 dark:text-gray-200 hover:tw-text-yellow-500 tw-transition">
+            <i class="{{link.icon}}"></i> {{ link.title }}
+          </a>
+        {% else %} 
+          <a href="{{ site.url }}{{ site.baseurl }}{{ link.url }}" class="tw-text-gray-800 dark:text-gray-200 hover:tw-text-yellow-500 tw-transition">
+            <i class="{{link.icon}}"></i> {{ link.title }}
+          </a>
+        {% endif %}
+      {% endfor %}
+      <a href="{{ site.url }}{{ site.baseurl }}/feed.xml" class="tw-text-gray-800 dark:text-gray-200 hover:tw-text-yellow-500 tw-transition">
+        <i class="fa fa-rss"></i> Feed
       </a>
-
-      <!-- the toggle button -->
-      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="navbar-toggler-icon"></span>
-        <span class="sr-only">Toggle navigation</span><!-- only for screen readers -->
-      </button>
-
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav mr-auto">
-
-          <!-- first item = dropdown search -->
-          <li class="nav-item">
-            <div class="dropdown search-box-margin">
-
-            
-              <div class="form-inline">
-                {% capture category_count %} {{ site.categories | size }}* {% endcapture %} {% assign count = category_count | plus: 0 %}
-
-                <input data-toggle="dropdown" placeholder="Search..." id="search-box" class="form-control form-control-sm search-input dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-
-
-                <div class="dropdown-menu" id="search-dropdown">
-                  <a role='presentation' class='dropdown-item search-results'> Type more.... </a>
-                </div>
-
-              </div>
-
-
-
-            <!-- the below line will pass "search word" to search.html -->
-
-            <!--
-            <form class="form-inline" action="{{ site.url }}{{ site.baseurl }}/search" method="get">
-              {% capture category_count %} {{ site.categories | size }}* {% endcapture %} {% assign count = category_count | plus: 0 %}
-
-
-              <label for="search_box">Search</label>
-              <input data-toggle="dropdown" type="text" name="query" placeholder="Search..." id="search-box" class="form-control form-control-sm search-input dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-
-              <div class="dropdown-menu" id="search-dropdown">
-                  <a role='presentation' class='dropdown-item search-results'> Type more.... </a>
-              </div>
-
-              <input type="submit" value="search">
-
-            </form>
-            -->
-
-            <!-- end of form -->
-
-
-            </div>
-          </li>
-        </ul>
+      <!-- Dark Mode Toggle -->
+      <button id="darkModeToggle" class="tw-ml-4 tw-bg-gray-200 dark:bg-gray-700 tw-p-2 tw-rounded-lg tw-flex tw-items-center focus:tw-outline-none">
+        <img id="sunIcon" class="tw-h-5 tw-w-5 dark:hidden" src="{{ site.baseurl }}/images/dark-mode-svgrepo-com (1).svg" alt="Sun Icon">
 
         
+        
+        <img id="moonIcon" class="tw-h-5 tw-w-5 tw-hidden dark:block" src="{{ site.baseurl }}/images/dark-mode-svgrepo-com (1).svg" alt="Moon Icon">
 
-        <!-- every link on the right side -->
-        <ul class="nav navbar-nav navbar-right nav-icon-size-reduce">
-          {% for link in site.links %}
-          <li class="nav-item">
-            {% if link.external %} 
-              <a href="{{ link.url }}" class="nav-link">
-                <i class="{{link.icon}}"></i> {{ link.title }}
-              </a>
-            {% else %} 
-              <a href="{{ site.url }}{{ site.baseurl }}{{ link.url }}" class="nav-link">
-                <i class="{{link.icon}}"></i> {{ link.title }}
-              </a>
-            {% endif %}
-          </li>
-          {% endfor %}
-
-          <!-- feed is the last link -->
-          <li class="nav-item">
-            <a href="{{ site.url }}{{ site.baseurl }}/feed.xml" class="nav-link" title="Atom/RSS feed">
-              <i class="fa fa-rss"></i> Feed
-            </a>
-          </li>
-        </ul>
-
-
-
-      </div> <!-- /.navbar-collapse -->
-
-  </nav>{% include browser-upgrade.html %}
+        
+        
+      </button>
+    </div>
+  </nav>
 </header>
-<!-- 
-{% if site.search %}
-  <div class="search-wrapper">
-    <div class="search-form">
-      <input type="text" class="search-field" placeholder="Search...">
-      <i class="icon-remove-sign icon-2x"></i>
-      <ul class="search-results post-list"></ul> -->
-<!-- /.search-results -->
-<!-- </div> -->
-<!-- /.search-form -->
-<!-- </div> -->
-<!-- ./search-wrapper -->
-<!-- {% endif %} -->
+
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('menu');
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  const htmlElement = document.documentElement;
+
+  menuToggle.addEventListener('click', () => {
+    menu.classList.toggle('tw-hidden');
+  });
+
+  darkModeToggle.addEventListener('click', () => {
+    if (htmlElement.classList.contains('tw-dark')) {
+      htmlElement.classList.remove('tw-dark');
+      localStorage.setItem('theme', 'light');
+    } else {
+      htmlElement.classList.add('tw-dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+
+  // Apply saved theme on load
+  if (localStorage.getItem('theme') === 'dark') {
+    htmlElement.classList.add('tw-dark');
+  }
+</script>
